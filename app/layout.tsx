@@ -13,19 +13,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://catalyst-lens-unihack.mamtaagarwal039.chatgpt.site'),
   title: 'Catalyst Lens | Product Intelligence Cockpit',
   description: 'Evidence-first AI product data enrichment for industrial commerce.',
+  alternates: { canonical: '/' },
   openGraph: {
     title: 'Catalyst Lens',
     description: 'Every product claim. Proven.',
     type: 'website',
-    images: [{ url: '/og.png', width: 1731, height: 909, alt: 'Catalyst Lens - Every product claim. Proven.' }],
+    url: 'https://catalyst-lens-unihack.mamtaagarwal039.chatgpt.site',
+    images: [{ url: 'https://catalyst-lens-unihack.mamtaagarwal039.chatgpt.site/og.png', width: 1731, height: 909, alt: 'Catalyst Lens - Every product claim. Proven.' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Catalyst Lens',
     description: 'Every product claim. Proven.',
-    images: ['/og.png'],
+    images: ['https://catalyst-lens-unihack.mamtaagarwal039.chatgpt.site/og.png'],
   },
 };
 

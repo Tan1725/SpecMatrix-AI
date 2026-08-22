@@ -32,6 +32,7 @@ function parseCsv(text: string) {
 
 function csvEscape(value: string) { return /[",\r\n]/.test(value) ? `"${value.replace(/"/g, '""')}"` : value; }
 function download(name: string, body: string, type: string) { const url = URL.createObjectURL(new Blob([body], { type })); const a = document.createElement('a'); a.href = url; a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); }
+function fileBase64(file: File) { return new Promise<string>((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(String(reader.result || '').split(',')[1] || ''); reader.onerror = () => reject(new Error(`Could not read ${file.name}`)); reader.readAsDataURL(file); }); }
 
 function classify(text: string): [string, string, string] {
   const rules: [RegExp, [string, string, string]][] = [
@@ -109,8 +110,8 @@ export default function Home() {
     if (!headers.length || !seedToRun.part.trim() || !seedToRun.description.trim()) { setLog('Add a part number and description first.'); return; }
     setRunning(true); setProduct(null); setAgents(EMPTY_AGENTS); setEditing(false); setLog('Starting secured AI orchestrator…');
     try {
-      const form = new FormData(); form.set('seed', JSON.stringify(seedToRun)); form.set('headers', JSON.stringify(headers)); files.forEach((file) => form.append('files', file));
-      const response = await fetch('/api/enrich', { method: 'POST', body: form });
+      const encodedFiles = await Promise.all(files.map(async (file) => ({ name: file.name, type: file.type, size: file.size, data: await fileBase64(file) })));
+      const response = await fetch('/api/enrich', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ seed: seedToRun, headers, files: encodedFiles }) });
       if (!response.ok || !response.body) { const error = await response.json().catch(() => ({})); throw new Error(error.error || `Agent service failed (${response.status})`); }
       const reader = response.body.getReader(); const decoder = new TextDecoder(); let pending = '';
       while (true) {

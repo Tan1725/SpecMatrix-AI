@@ -2,6 +2,7 @@ export const runtime = 'edge';
 
 type Seed = { part: string; description: string; brand?: string; manufacturer?: string };
 type Source = { title: string; url: string };
+type UploadedFile = { name: string; type: string; data: string; size: number };
 
 const MODEL = 'gemini-2.5-flash';
 const MAX_FILE_BYTES = 8 * 1024 * 1024;
@@ -9,14 +10,6 @@ const ACCEPTED_TYPES = new Set(['application/pdf', 'image/jpeg', 'image/png', 'i
 
 function jsonLine(controller: ReadableStreamDefaultController, payload: unknown) {
   controller.enqueue(new TextEncoder().encode(`${JSON.stringify(payload)}\n`));
-}
-
-function toBase64(buffer: ArrayBuffer) {
-  const bytes = new Uint8Array(buffer);
-  let binary = '';
-  const stride = 0x8000;
-  for (let i = 0; i < bytes.length; i += stride) binary += String.fromCharCode(...bytes.subarray(i, i + stride));
-  return btoa(binary);
 }
 
 async function gemini(apiKey: string, body: unknown) {
@@ -76,11 +69,9 @@ function validateOutput(raw: Record<string, unknown>, headers: string[], seed: S
 export async function POST(request: Request) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) return Response.json({ error: 'The AI service is not configured.' }, { status: 503 });
-  const form = await request.formData();
-  let seed: Seed; let headers: string[];
-  try { seed = JSON.parse(String(form.get('seed') || '{}')); headers = JSON.parse(String(form.get('headers') || '[]')); } catch { return Response.json({ error: 'Invalid product request.' }, { status: 400 }); }
+  let seed: Seed; let headers: string[]; let files: UploadedFile[];
+  try { const body = await request.json() as { seed?: Seed; headers?: string[]; files?: UploadedFile[] }; seed = body.seed || {} as Seed; headers = body.headers || []; files = (body.files || []).slice(0, 4); } catch { return Response.json({ error: 'Invalid product request.' }, { status: 400 }); }
   if (!seed.part?.trim() || !seed.description?.trim() || !headers.length) return Response.json({ error: 'Part number, description, and output schema are required.' }, { status: 400 });
-  const files = form.getAll('files').filter((entry): entry is File => entry instanceof File).slice(0, 4);
   for (const file of files) {
     if (file.size > MAX_FILE_BYTES) return Response.json({ error: `${file.name} is larger than 8 MB.` }, { status: 413 });
     if (!ACCEPTED_TYPES.has(file.type)) return Response.json({ error: `${file.name} is not a supported PDF, image, text, or CSV file.` }, { status: 415 });
@@ -98,7 +89,7 @@ export async function POST(request: Request) {
         const researchText = modelText(research); const sources = sourcesFrom(research);
         jsonLine(controller, { type: 'agent', index: 0, state: 'done', message: `${sources.length} grounded web sources retrieved` });
         jsonLine(controller, { type: 'agent', index: 1, state: 'working', message: files.length ? `Reading ${files.length} uploaded document/image source(s)` : 'Analyzing the supplied product seed' });
-        const fileParts = await Promise.all(files.map(async (file) => ({ inlineData: { mimeType: file.type, data: toBase64(await file.arrayBuffer()) } })));
+        const fileParts = files.map((file) => ({ inlineData: { mimeType: file.type, data: file.data } }));
         jsonLine(controller, { type: 'agent', index: 1, state: 'done', message: files.length ? 'Document and image evidence extracted' : 'Seed evidence extracted' });
         jsonLine(controller, { type: 'agent', index: 2, state: 'working', message: 'Running RAG and generating the commerce record' });
         const schemaPrompt = `You are the Orchestrator, RAG, Catalog, and Content Agents for industrial product enrichment.\n\nINPUT SEED:\n${JSON.stringify(seed)}\n\nGROUNDED WEB DOSSIER:\n${researchText}\n\nREQUIRED OUTPUT HEADERS (exact spelling):\n${JSON.stringify(headers)}\n\nUse the web dossier and attached files as retrieval context. Populate an exact-product commerce record. Never transfer a fact from a similar model unless you label it as an inference and lower confidence. Leave unsupported fields as empty strings. Preserve every required header exactly; do not add fields inside product. Generate concise channel-ready descriptions, approved-style taxonomy, normalized units, attributes, assets, identifiers, and compliance fields when evidenced. Return JSON only in this shape: {"product":{"HEADER":"value"},"claims":[{"field":"required header","value":"value","confidence":0,"evidence":"specific excerpt or reasoning","sourceUrl":"URL if web sourced","sourceType":"input|web|pdf|image|rag_inference"}]}. Include a claim for each non-empty enriched field.`;

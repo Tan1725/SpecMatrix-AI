@@ -419,7 +419,7 @@ export default function Home() {
       });
 
       if (!response.ok || !response.body) {
-        const error = await response.json().catch(() => ({}));
+        const error = (await response.json().catch(() => ({}))) as { error?: string };
         throw new Error(error.error || `Agent service failed (${response.status})`);
       }
 

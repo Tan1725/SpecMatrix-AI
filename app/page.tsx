@@ -585,10 +585,10 @@ export default function Home() {
       {/* ── Top App Bar (Clean Header: Name & Purpose Only) ── */}
       <header className="stitch-topbar">
         <div className="topbar-brand">
-          <div className="topbar-logo">CL</div>
+          <div className="topbar-logo">SM</div>
           <div className="topbar-title">
-            <h1>Catalyst Lens</h1>
-            <p>AI-Powered Product Intelligence for Industrial Commerce</p>
+            <h1>SpecMatrix AI</h1>
+            <p>Autonomous Multi-Agent Product Intelligence Engine</p>
           </div>
         </div>
 
@@ -604,7 +604,7 @@ export default function Home() {
           <div className="hero-text">
             <h2>Transform Scattered Data into Structured Intelligence</h2>
             <p>
-              Autonomous multi-agent pipeline converts unstandardized distributor product feeds into validated, search-ready catalog records — strictly preserving all <strong>252 static delivery headers</strong> and Unilog content guidelines.
+              Autonomous multi-agent pipeline converts unstandardized distributor product feeds into validated, search-ready catalog records — strictly preserving all <strong>252 static delivery headers</strong> and enterprise content guidelines.
             </p>
           </div>
 

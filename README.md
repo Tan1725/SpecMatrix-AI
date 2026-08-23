@@ -1,4 +1,4 @@
-# ⚡ Catalyst Lens — Autonomous Multi-Agent Product Intelligence Platform
+# ⚡ SpecMatrix AI — Autonomous Multi-Agent Product Intelligence Platform
 
 <div align="center">
 
@@ -26,7 +26,7 @@ Industrial distributors manage millions of complex SKUs across diverse domains (
 - Missing attribute values, inconsistent units of measure (UOM), and absent specification sheets
 - Zero source traceability for regulatory compliance
 
-**Catalyst Lens** is an autonomous multi-agent product intelligence platform that ingests raw product seeds, technical PDF specification sheets, and engineering drawings to synthesize **100% compliant 252-column commerce catalogs** with full evidence traceability, List of Values (LOV) normalization, and automated confidence scoring.
+**SpecMatrix AI** is an autonomous multi-agent product intelligence platform that ingests raw product seeds, technical PDF specification sheets, and engineering drawings to synthesize **100% compliant 252-column commerce catalogs** with full evidence traceability, List of Values (LOV) normalization, and automated confidence scoring.
 
 ---
 

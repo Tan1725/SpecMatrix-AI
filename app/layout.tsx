@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Catalyst Lens — AI-Powered Product Intelligence for Industrial Commerce',
-  description: 'Convert scattered industrial product data into validated, structured 252-header commerce catalogs.',
+  title: 'SpecMatrix AI — Autonomous Multi-Agent Product Intelligence Platform',
+  description: 'Enterprise AI engine converting raw distributor product data into structured, validated 252-column commerce catalogs.',
 };
 
 export default function RootLayout({

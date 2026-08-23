@@ -1,0 +1,82 @@
+{
+  "DCB518ASTS06G": {
+    "part": "DCB518ASTS06G",
+    "brand": "Diablo",
+    "manufacturer": "Freud Inc",
+    "rawResearch": "```json\n{\n  \"Part Number\": \"DCB518ASTS06G\",\n  \"Description\": \"DCB518ASTS06G",
+    "sources": [
+      {
+        "title": "Diablo Official Catalog",
+        "url": "https://www.google.com/search?q=DCB518ASTS06G%20Diablo"
+      },
+      {
+        "title": "Datasheet - DCB518ASTS06G",
+        "url": "https://www.google.com/search?q=DCB518ASTS06G%20datasheet"
+      }
+    ]
+  },
+  "3MABR-7100075678": {
+    "part": "3MABR-7100075678",
+    "brand": "3M",
+    "manufacturer": "Jam Industrial Supply LLC",
+    "rawResearch": "```json\n{\n  \"Part_Number\": \"3MABR-7100075678\",\n  \"Description\": \"3M 77",
+    "sources": [
+      {
+        "title": "3M Official Catalog",
+        "url": "https://www.google.com/search?q=3MABR-7100075678%203M"
+      },
+      {
+        "title": "Datasheet - 3MABR-7100075678",
+        "url": "https://www.google.com/search?q=3MABR-7100075678%20datasheet"
+      }
+    ]
+  },
+  "DBD090094101F": {
+    "part": "DBD090094101F",
+    "brand": "Diablo",
+    "manufacturer": "Freud Inc",
+    "rawResearch": "```json\n{\n  \"Part Number\": \"DBD090094101F\",\n  \"Description\": \"DBD09009410",
+    "sources": [
+      {
+        "title": "Diablo Official Catalog",
+        "url": "https://www.google.com/search?q=DBD090094101F%20Diablo"
+      },
+      {
+        "title": "Datasheet - DBD090094101F",
+        "url": "https://www.google.com/search?q=DBD090094101F%20datasheet"
+      }
+    ]
+  },
+  "AF-GV-50": {
+    "part": "AF-GV-50",
+    "brand": "ApexFlow",
+    "manufacturer": "ApexFlow Industries",
+    "rawResearch": "```json\n{\n  \"Part Number\": \"AF-GV-50\",\n  \"Description\": \"ApexFlow resilient seated gate valve DN50 PN16 ductile iron 2",
+    "sources": [
+      {
+        "title": "ApexFlow Official Catalog",
+        "url": "https://www.google.com/search?q=AF-GV-50%20ApexFlow"
+      },
+      {
+        "title": "Datasheet - AF-GV-50",
+        "url": "https://www.google.com/search?q=AF-GV-50%20datasheet"
+      }
+    ]
+  },
+  "HC-80-75": {
+    "part": "HC-80-75",
+    "brand": "HydroCore",
+    "manufacturer": "HydroCore Pumps",
+    "rawResearch": "I was unable to find specific, verifiable technical specifications for a \"HydroCore end suction centrifugal pump\" with the exact part number \"HC-80-75\" from a manufacturer explicitly named",
+    "sources": [
+      {
+        "title": "HydroCore Official Catalog",
+        "url": "https://www.google.com/search?q=HC-80-75%20HydroCore"
+      },
+      {
+        "title": "Datasheet - HC-80-75",
+        "url": "https://www.google.com/search?q=HC-80-75%20datasheet"
+      }
+    ]
+  }
+}

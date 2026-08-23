@@ -1,49 +1,27 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
-
 export const metadata: Metadata = {
-  metadataBase: new URL('https://catalyst-lens-unihack.mamtaagarwal039.chatgpt.site'),
-  title: 'Catalyst Lens | Product Intelligence Cockpit',
-  description: 'Evidence-first AI product data enrichment for industrial commerce.',
-  alternates: { canonical: '/' },
-  openGraph: {
-    title: 'Catalyst Lens',
-    description: 'Every product claim. Proven.',
-    type: 'website',
-    url: 'https://catalyst-lens-unihack.mamtaagarwal039.chatgpt.site',
-    images: [{ url: 'https://catalyst-lens-unihack.mamtaagarwal039.chatgpt.site/og.png', width: 1731, height: 909, alt: 'Catalyst Lens - Every product claim. Proven.' }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Catalyst Lens',
-    description: 'Every product claim. Proven.',
-    images: ['https://catalyst-lens-unihack.mamtaagarwal039.chatgpt.site/og.png'],
-  },
+  title: 'Catalyst Lens — AI-Powered Product Intelligence for Industrial Commerce',
+  description: 'Convert scattered industrial product data into validated, structured 252-header commerce catalogs.',
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body>{children}</body>
     </html>
   );
 }
